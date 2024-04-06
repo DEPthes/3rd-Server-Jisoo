@@ -1,0 +1,27 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.0-M3'
+	id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'hello'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral() //아래 라이브러리들을 다운 받기 위한 것
+	maven { url 'https://repo.spring.io/milestone' }
+}
+
+dependencies {b
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'//앞에서 설정 했던 것
+	implementation 'org.springframework.boot:spring-boot-starter-web' //앞에서 설정 했던 것
+	testImplementation 'org.springframework.boot:spring-boot-starter-test' //자동으로 들감
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
