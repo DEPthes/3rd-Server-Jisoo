@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @Service
 public class BoardService {
     @Autowired
@@ -15,6 +17,7 @@ public class BoardService {
     public void write(Board board){
         boardRepository.save(board);
     }
+
     //게시글리스트 처리
     public List<Board> boardList(){
         return boardRepository.findAll();
@@ -23,5 +26,10 @@ public class BoardService {
     //특정 게시글 불러오기
     public Board boardView(Integer id){
         return boardRepository.findById(id).get();
+    }
+
+    //특정 게시글 삭제
+    public void boardDelete(Integer id){
+        boardRepository.deleteById(id);
     }
 }

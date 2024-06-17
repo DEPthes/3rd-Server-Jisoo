@@ -28,13 +28,21 @@ public class BoardController {
 
     @GetMapping("/board/list")
     public String boardList(Model model){
+        //서비스에서 게시글 리스트를 조회하여 모델에 추가
         model.addAttribute("list",boardService.boardList());
         return "boardlist";
     }
 
     @GetMapping("/board/view") //localhost:8090/board/view?id=1
     public String boardView(Model model, @RequestParam("id") Integer id){
+        //서비스에서 특정 게시글을 조회하여 모델에 추가
         model.addAttribute("board",boardService.boardView(id));
         return "boardview";
+    }
+
+    @GetMapping("/board/delete")
+    public String boardDelete(@RequestParam("id") Integer id){
+        boardService.boardDelete(id);
+        return "redirect:/board/list";
     }
 }
