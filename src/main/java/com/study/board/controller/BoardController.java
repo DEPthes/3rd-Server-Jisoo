@@ -36,13 +36,15 @@ public class BoardController {
                             @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC)
                             Pageable pageable) {
 
+        // 서비스 계층에서 페이징된 게시물 리스트를 가져온다.
         Page<Board> list = boardService.boardList(pageable);
-
-
+        // 현재 페이지 번호를 계산 (0-based에서 1-based로 변환)
         int nowPage = list.getPageable().getPageNumber() + 1;
+        // 페이지 네비게이션의 시작 페이지를 계산한다.
         int startPage = Math.max(nowPage - 4, 1);
+        // 페이지 네비게이션의 끝 페이지를 계산한다.
         int endPage = Math.min(nowPage + 5, list.getTotalPages());
-
+        //모델에 데이터 추가
         model.addAttribute("list", list);
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
